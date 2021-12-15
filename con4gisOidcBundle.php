@@ -18,7 +18,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  * Class con4gisOidcBundle
  * @package con4gis\OidcBundle
  */
-class con4gisAuthBundle extends Bundle
+class con4gisOidcBundle extends Bundle
 {
 
 }

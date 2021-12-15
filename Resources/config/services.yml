@@ -1,0 +1,8 @@
+# config/services.yaml
+parameters:
+  env(SECURED_FRONTEND): "ROLE_OAUTH_USER"
+
+services:
+  oidc_authenticator:
+    class: con4gis\OidcBundle\Security\OidcAuthenticator
+    autowire: true

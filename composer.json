@@ -27,7 +27,9 @@
     "menatwork/contao-multicolumnwizard": "^3.3",
     "doctrine/orm": "^2.5.14",
     "doctrine/data-fixtures": "^1.2.2",
-    "guzzlehttp/guzzle": "^6.2"
+    "guzzlehttp/guzzle": "^6.2",
+    "knpuniversity/oauth2-client-bundle": "^2.0",
+    "stevenmaguire/oauth2-keycloak": "^2.0"
   },
   "conflict": {
     "contao/core": "*",
@@ -35,7 +37,7 @@
   },
   "autoload": {
     "psr-4": {
-      "con4gis\\AuthBundle\\": ""
+      "con4gis\\OidcBundle\\": ""
     },
     "classmap": [
       "Resources/contao/"
