@@ -13,9 +13,12 @@ use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
+use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
 class OidcAuthenticator extends SocialAuthenticator
 {
+    use TargetPathTrait;
+
     private $clientRegistry;
 
     public function __construct(ClientRegistry $clientRegistry, EntityManagerInterface $em, RouterInterface $router)
@@ -53,6 +56,10 @@ class OidcAuthenticator extends SocialAuthenticator
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
+        if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
+            return new RedirectResponse($targetPath);
+        }
+
         return new RedirectResponse('/',
             Response::HTTP_TEMPORARY_REDIRECT
         );
