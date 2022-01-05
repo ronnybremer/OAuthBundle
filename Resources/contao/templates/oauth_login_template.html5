@@ -1,0 +1,9 @@
+<!-- indexer::stop -->
+<?php if (!$this->loginStatus) { ?>
+<div class='login login-oauth'>
+    <form action="<?= $this->c4g_oauth_type ?>">
+        <button id='login-oauth-btn' class='btn btn-oauth btn-login-oauth' type="submit"><?= $this->c4g_oauth_btn_name ?></button>
+    </form>
+</div>
+<?php } ?>
+<!-- indexer::continue -->
