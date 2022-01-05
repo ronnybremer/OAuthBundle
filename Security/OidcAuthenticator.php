@@ -2,6 +2,9 @@
 
 namespace con4gis\OidcBundle\Security;
 
+use Contao\System;
+use Contao\CoreBundle\Framework\ContaoFramework;
+use con4gis\OidcBundle\Classes\LoginUserHandler;
 use Doctrine\ORM\EntityManagerInterface;
 use KnpU\OAuth2ClientBundle\Client\OAuth2ClientInterface;
 use KnpU\OAuth2ClientBundle\Security\Authenticator\SocialAuthenticator;
@@ -22,12 +25,14 @@ class OidcAuthenticator extends SocialAuthenticator
     private $clientRegistry;
     private $em;
     private $router;
+    private $framework;
 
-    public function __construct(ClientRegistry $clientRegistry, EntityManagerInterface $em, RouterInterface $router)
+    public function __construct(ContaoFramework $contaoFramework, ClientRegistry $clientRegistry, RouterInterface $router, EntityManagerInterface $em)
     {
         $this->clientRegistry = $clientRegistry;
         $this->em = $em;
         $this->router = $router;
+        $this->framework = $contaoFramework;
     }
 
     public function supports(Request $request)
@@ -46,8 +51,31 @@ class OidcAuthenticator extends SocialAuthenticator
     {
         if ($_ENV['SECURED'] == 'true') {
             $user = $userProvider->loadUserByUsername($this->getOidcClient()->fetchUserFromToken($credentials)->getId());
-            return $user;
+        } else {
+            $oidcUser = $this->getOidcClient()->fetchUserFromToken($credentials);
+            $oidcUser = $oidcUser->toArray();
+
+            $firstname = $oidcUser['given_name'];
+            $lastname = $oidcUser['family_name'];
+            $username = $oidcUser['preferred_username'];
+            $email = $oidcUser['email'];
+
+            $userArray = [
+                'username' => $username,
+                'email' => $email,
+                'firstname' => $firstname,
+                'lastname' => $lastname,
+                'groups' => []
+            ];
+
+            $this->framework->initialize();
+            $loginUser = new LoginUserHandler();
+            $feUser = $loginUser->addUser($userArray);
+
+            $user = $userProvider->loadUserByUsername($feUser->username);
         }
+
+        return $user;
     }
 
     /**

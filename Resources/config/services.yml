@@ -9,6 +9,16 @@ parameters:
   secured: "false"
 
 services:
+  _defaults:
+    public: true
+  _instanceof:
+    Contao\CoreBundle\Framework\FrameworkAwareInterface:
+      calls:
+        - [ "setFramework", [ "@contao.framework" ] ]
+    Symfony\Component\DependencyInjection\ContainerAwareInterface:
+      calls:
+        - [ "setContainer", [ "@service_container" ] ]
   oidc_authenticator:
     class: con4gis\OidcBundle\Security\OidcAuthenticator
+    arguments: ["@contao.framework", "@knpu.oauth2.registry"]
     autowire: true
