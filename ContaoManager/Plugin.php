@@ -34,6 +34,7 @@ class Plugin implements BundlePluginInterface, ExtensionPluginInterface, Routing
     public function registerContainerConfiguration(LoaderInterface $loader, array $config)
     {
         $loader->load('@con4gisOidcBundle/Resources/config/knpu_oauth2_client.yml');
+        $loader->load(__DIR__.'/../Resources/config/services.yml');
     }
 
     /**
@@ -81,39 +82,38 @@ class Plugin implements BundlePluginInterface, ExtensionPluginInterface, Routing
         foreach ($extensionConfigs as &$extensionConfig) {
             if (isset($extensionConfig['firewalls'])) {
 
-                // Add e.g. your own security authentication provider
+                //Add custom encoder for knpu oauth2
+                $extensionConfig['encoders']['KnpU\OAuth2ClientBundle\Security\User\OAuthUser'] = [
+                    'algorithm' => 'auto'
+                ];
+
+                // Add own security authentication provider
                 $extensionConfig['providers']['oauth'] = [
                     'id' => 'knpu.oauth2.user_provider'
                 ];
-                // Add your own firewall before the "frontend" firewall of Contao
-                // Int-Cast position so "false" (not found) results in position 0.
+
+                $extensionConfig['providers']['frontend_chain'] = [
+                    'chain' => [
+                        'providers' => ['oauth','contao.security.frontend_user_provider']
+                    ]
+                ];
+
                 $offset = (int) array_search('frontend', array_keys($extensionConfig['firewalls']));
 
-                $extensionConfig['access_control'][3]['roles'] = '%env(SECURED_FRONTEND)%';
-
-                $accessControlOauth = [
-                    'path' => '^/oauth',
-                    'roles' => 'IS_AUTHENTICATED_ANONYMOUSLY'
+                $extensionConfig['firewalls']['contao_frontend']['guard'] = [
+                    'authenticators' => [
+                        'oidc_authenticator'
+                    ]
                 ];
-                array_unshift($extensionConfig['access_control'], $accessControlOauth);
-//                var_dump($extensionConfig);
+                unset($extensionConfig['firewalls']['contao_frontend']['request_matcher']);
+                if ($container->getParameter('secured') == 'true') {
+                    $extensionConfig['access_control'][3]['roles'] = "ROLE_OAUTH_USER";
 
-                $extensionConfig['firewalls'] = array_merge(
-                    array_slice($extensionConfig['firewalls'], 0, $offset, true),
-                    [
-                        'secured_frontend' => [
-                            'pattern' => '^/(?!oauth/login|contao)',
-                            'anonymous' => false,
-                            'provider' => 'oauth',
-                            'guard' => [
-                                'authenticators' => [
-                                    'oidc_authenticator'
-                                ],
-                            ],
-                        ],
-                    ],
-                    array_slice($extensionConfig['firewalls'], $offset, null, true)
-                );
+                    $extensionConfig['firewalls']['contao_frontend']['entry_point'] = 'oidc_authenticator';
+                    $extensionConfig['firewalls']['contao_frontend']['pattern'] = '^/(?!oidc/login|oidc/login|contao)';
+                    $extensionConfig['firewalls']['contao_frontend']['provider'] = 'frontend_chain';
+                    $extensionConfig['firewalls']['contao_frontend']['anonymous'] = false;
+                }
 
                 break;
             }

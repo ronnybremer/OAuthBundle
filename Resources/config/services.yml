@@ -1,6 +1,12 @@
 # config/services.yaml
 parameters:
-  env(SECURED_FRONTEND): "ROLE_OAUTH_USER"
+  env(SECURED): "%secured%"
+  oauth_oidc_client_id: "###"
+  oauth_oidc_client_secret: "###"
+  oauth_oidc_auth_server_url: "###"
+  oauth_oidc_realm: "###"
+  secured_frontend: "IS_AUTHENTICATED_ANONYMOUSLY"
+  secured: "false"
 
 services:
   oidc_authenticator:

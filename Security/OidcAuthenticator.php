@@ -20,10 +20,14 @@ class OidcAuthenticator extends SocialAuthenticator
     use TargetPathTrait;
 
     private $clientRegistry;
+    private $em;
+    private $router;
 
     public function __construct(ClientRegistry $clientRegistry, EntityManagerInterface $em, RouterInterface $router)
     {
         $this->clientRegistry = $clientRegistry;
+        $this->em = $em;
+        $this->router = $router;
     }
 
     public function supports(Request $request)
@@ -40,8 +44,10 @@ class OidcAuthenticator extends SocialAuthenticator
 
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
-        $user = $userProvider->loadUserByUsername($this->getOidcClient()->fetchUserFromToken($credentials)->getId());
-        return $user;
+        if ($_ENV['SECURED'] == 'true') {
+            $user = $userProvider->loadUserByUsername($this->getOidcClient()->fetchUserFromToken($credentials)->getId());
+            return $user;
+        }
     }
 
     /**
@@ -57,7 +63,7 @@ class OidcAuthenticator extends SocialAuthenticator
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
-            return new RedirectResponse($targetPath);
+            return new RedirectResponse($targetPath, Response::HTTP_TEMPORARY_REDIRECT);
         }
 
         return new RedirectResponse('/',
@@ -79,7 +85,7 @@ class OidcAuthenticator extends SocialAuthenticator
     public function start(Request $request, AuthenticationException $authException = null)
     {
         return new RedirectResponse(
-            '/oauth/login',
+            '/oidc/login',
             Response::HTTP_TEMPORARY_REDIRECT
         );
     }

@@ -3,8 +3,11 @@
 namespace con4gis\OidcBundle\Controller;
 
 use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
+use KnpU\OAuth2ClientBundle\Client\OAuth2ClientInterface;
+use KnpU\OAuth2ClientBundle\Security\User\OAuthUserProvider;
 use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,7 +17,7 @@ class KeycloakController extends AbstractController
     /**
      * Link to this controller to start the "connect" process
      *
-     * @Route("/oauth/login", name="connect_oidc_start")
+     * @Route("/oidc/login", name="connect_oidc_start")
      */
     public function connectAction()
     {
@@ -30,7 +33,7 @@ class KeycloakController extends AbstractController
      * because this is the "redirect_route" you configured
      * in config/packages/knpu_oauth2_client.yaml
      *
-     * @Route("/oauth/callback", name="connect_oidc_check")
+     * @Route("/oidc/callback", name="connect_oidc_check")
      */
     public function connectCheckAction(Request $request) { }
 }
