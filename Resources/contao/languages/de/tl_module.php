@@ -13,3 +13,4 @@ $array = &$GLOBALS['TL_LANG']['tl_module']['c4g_oauth']['fields'];
 $array['type'] = array('Loginanbieter', 'Hier den Anbieter auswählen, welcher für den Login genutzt werden soll.');
 $array['type_oidc'] = 'OpenID Connect';
 $array['btn_name'] = array('Beschriftung des Login Buttons', 'Hier kann ein Buttontext für die Anmeldung hinterlegt werden.');
+$array['oauth_reg_groups'] = array('Mitgliedergruppen', 'Hier können Sie das Mitglied einer oder mehreren Gruppen zuweisen.');

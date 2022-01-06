@@ -14,20 +14,29 @@
 
 namespace con4gis\OidcBundle\Classes;
  
-use Contao\MemberModel;
+use con4gis\OidcBundle\Resources\contao\models\OAuthMemberModel;
+use Contao\Database;
 
 class LoginUserHandler
 {
 
-    public function addUser ($userArray) {
+    private $db = null;
 
-        $feUser = MemberModel::findByUsername($userArray['username']);
+    public function __construct()
+    {
+        $this->db = Database::getInstance();
+    }
+    
+    public function addUser ($userArray, $loginRoute) {
+
+        $feUser = OAuthMemberModel::findByUsername($userArray['username']);
         if (!$feUser) {
-            $feUser = new MemberModel();
+            $feUser = new OAuthMemberModel();
             $feUser->dateAdded = time();
         } else {
             $feUser->lastLogin = $feUser->currentLogin;
         }
+        $feUser->c4gOAuthMember = 1;
         $feUser->login = 1;
         $feUser->tstamp = time();
         $feUser->currentLogin = time();
@@ -35,6 +44,26 @@ class LoginUserHandler
         $feUser->firstname = $userArray['firstname'];
         $feUser->lastname = $userArray['lastname'];
         $feUser->username = $userArray['username'];
+
+        //add user to groups
+        $loginModule = $this->db->prepare("SELECT * FROM tl_module WHERE c4g_oauth_type = ?")
+            ->execute($loginRoute)->fetchAssoc();
+        $feUserGroups = $feUser->groups;
+        if ($feUserGroups && $feUserGroups != 'a:0:{}') {
+            $feUserGroups = unserialize($feUserGroups);
+            $loginGroups = unserialize($loginModule['c4g_oauth_reg_groups']);
+            $missingGroups = array_diff($loginGroups, $feUserGroups);
+            if ($missingGroups) {
+                foreach ($missingGroups as $missingGroup) {
+                    $feUserGroups[] = $missingGroup;
+                }
+                $feUser->groups = serialize($feUserGroups);
+            }
+        } else {
+            $feUser->groups = $loginModule['c4g_oauth_reg_groups'];
+        }
+
+        //save member
         $feUser->save();
 
         return $feUser;

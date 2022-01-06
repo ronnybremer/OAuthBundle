@@ -20,7 +20,7 @@
  * @link      https://www.kuestenschmiede.de
  */
 
-$GLOBALS['TL_DCA']['tl_module']['palettes']['oauth_login'] = '{title_legend},name,type,c4g_oauth_type,c4g_oauth_btn_name;';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['oauth_login'] = '{title_legend},name,type,c4g_oauth_type,c4g_oauth_btn_name,c4g_oauth_reg_groups;';
 
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['c4g_oauth_type'] = array
@@ -46,4 +46,15 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['c4g_oauth_btn_name'] = array
     'default'                 => 'Login',
     'eval'                    => ['submitOnChange' => false, 'tl_class' => 'w50', 'mandatory' => true],
     'sql'                     => "varchar(256) unsigned NOT NULL default ''",
+);
+
+$GLOBALS['TL_DCA']['tl_module']['fields']['c4g_oauth_reg_groups'] = array
+(
+    'label'                   => &$GLOBALS['TL_LANG']['tl_module']['c4g_oauth']['fields']['oauth_reg_groups'],
+    'exclude'                 => true,
+    'inputType'               => 'checkbox',
+    'foreignKey'              => 'tl_member_group.name',
+    'eval'                    => array('multiple'=>true),
+    'sql'                     => "blob NULL",
+    'relation'                => array('type'=>'hasMany', 'load'=>'lazy')
 );

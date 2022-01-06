@@ -70,7 +70,7 @@ class OidcAuthenticator extends SocialAuthenticator
 
             $this->framework->initialize();
             $loginUser = new LoginUserHandler();
-            $feUser = $loginUser->addUser($userArray);
+            $feUser = $loginUser->addUser($userArray, '/oidc/login');
 
             $user = $userProvider->loadUserByUsername($feUser->username);
         }
