@@ -62,4 +62,8 @@ class OAuthCallback
 
         Message::addInfo($GLOBALS['TL_LANG'][$dc->table]['c4g_oauth_readonly_info']);
     }
+
+    public function oauthMemberMappingOptions(\MultiColumnWizard $dc = null) {
+        return [];
+    }
 }

@@ -9,19 +9,9 @@
  * @link https://www.con4gis.org
  */
 
-/**
- * con4gis - the gis-kit
- *
- * @version   php 7
- * @package   east_frisia
- * @author    contributors (see "authors.txt")
- * @license   GNU/LGPL http://opensource.org/licenses/lgpl-3.0.html
- * @copyright Küstenschmiede GmbH Software & Design 2011 - 2018
- * @link      https://www.kuestenschmiede.de
- */
+$cbClass = con4gis\OidcBundle\Classes\OAuthCallback::class;
 
-$GLOBALS['TL_DCA']['tl_module']['palettes']['oauth_login'] = '{title_legend},name,type,c4g_oauth_type,c4g_oauth_btn_name,c4g_oauth_reg_groups;';
-
+$GLOBALS['TL_DCA']['tl_module']['palettes']['oauth_login'] = '{title_legend},name,type,c4g_oauth_type,c4g_oauth_btn_name,c4g_oauth_reg_groups,c4g_oauth_member_mapping;';
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['c4g_oauth_type'] = array
 (
@@ -57,4 +47,33 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['c4g_oauth_reg_groups'] = array
     'eval'                    => array('multiple'=>true),
     'sql'                     => "blob NULL",
     'relation'                => array('type'=>'hasMany', 'load'=>'lazy')
+);
+
+$GLOBALS['TL_DCA']['tl_module']['fields']['c4g_oauth_member_mapping'] = array
+(
+    'label'                   => &$GLOBALS['TL_LANG']['tl_module']['c4g_oauth']['fields']['memberMapping'],
+    'sorting'                 => true,
+    'search'                  => true,
+    'inputType'               => 'multiColumnWizard',
+    'default'                 => 'a:0:{}',
+    'eval'                    => array(
+        'columnFields' => array(
+            'contaoField' => array(
+                'label'                   => &$GLOBALS['TL_LANG']['tl_module']['c4g_oauth']['fields']['contaoField'],
+                'filter'                  => false,
+                'inputType'               => 'text',
+//                'inputType'               => 'select',
+//                'options_callback'        => array($cbClass, 'oauthMemberMappingOptions'),
+                'eval'                    => array('tl_class' => 'w50'),
+            ),
+            'oauthField' => array(
+                'label'                   => &$GLOBALS['TL_LANG']['tl_module']['c4g_oauth']['fields']['oauthField'],
+                'sorting'                 => true,
+                'search'                  => true,
+                'inputType'               => 'text',
+                'default'                 => '',
+                'eval'                    => array('tl_class' => 'w50'),
+            ),
+        ),
+    ),
 );
