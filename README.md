@@ -1,2 +1,2 @@
-# OidcBundle
-OpenID Connect Bundle for Contao
+# OAuthBundle
+OAuth and OpenID Connect Bundle for Contao
