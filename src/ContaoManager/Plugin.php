@@ -10,9 +10,9 @@
  * @copyright  Küstenschmiede GmbH Software & Design
  * @link       https://www.con4gis.org
  */
-namespace con4gis\OidcBundle\ContaoManager;
+namespace con4gis\OAuthBundle\ContaoManager;
 
-use con4gis\OidcBundle\con4gisOidcBundle;
+use con4gis\OAuthBundle\con4gisOAuthBundle;
 use Contao\CoreBundle\ContaoCoreBundle;
 use Contao\ManagerPlugin\Bundle\Config\BundleConfig;
 use Contao\ManagerPlugin\Bundle\Config\ConfigInterface;
@@ -33,7 +33,7 @@ class Plugin implements BundlePluginInterface, ExtensionPluginInterface, Routing
 {
     public function registerContainerConfiguration(LoaderInterface $loader, array $config)
     {
-        $loader->load('@con4gisOidcBundle/Resources/config/knpu_oauth2_client.yml');
+        $loader->load('@con4gisOAuthBundle/Resources/config/knpu_oauth2_client.yml');
         $loader->load(__DIR__.'/../Resources/config/services.yml');
     }
 
@@ -59,7 +59,7 @@ class Plugin implements BundlePluginInterface, ExtensionPluginInterface, Routing
     {
         return [
             BundleConfig::create(KnpUOAuth2ClientBundle::class),
-            BundleConfig::create(con4gisOidcBundle::class)
+            BundleConfig::create(con4gisOAuthBundle::class)
                 ->setLoadAfter([ContaoCoreBundle::class, KnpUOAuth2ClientBundle::class])
         ];
     }

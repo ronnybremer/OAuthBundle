@@ -12,7 +12,7 @@
  *
  */
 
-use con4gis\OidcBundle\Classes\OAuthCallback;
+use con4gis\OAuthBundle\Classes\OAuthCallback;
 
 /**
  * Register callbacks

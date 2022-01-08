@@ -4,7 +4,7 @@ namespace con4gis\OidcBundle\Security;
 
 use Contao\System;
 use Contao\CoreBundle\Framework\ContaoFramework;
-use con4gis\OidcBundle\Classes\LoginUserHandler;
+use con4gis\OAuthBundle\Classes\LoginUserHandler;
 use Doctrine\ORM\EntityManagerInterface;
 use KnpU\OAuth2ClientBundle\Client\OAuth2ClientInterface;
 use KnpU\OAuth2ClientBundle\Security\Authenticator\SocialAuthenticator;

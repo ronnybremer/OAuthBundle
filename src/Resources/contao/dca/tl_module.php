@@ -9,7 +9,7 @@
  * @link https://www.con4gis.org
  */
 
-$cbClass = con4gis\OidcBundle\Classes\OAuthCallback::class;
+$cbClass = con4gis\OAuthBundle\Classes\OAuthCallback::class;
 
 $GLOBALS['TL_DCA']['tl_module']['palettes']['oauth_login'] = '{title_legend},name,type,c4g_oauth_type,c4g_oauth_btn_name,c4g_oauth_reg_groups,c4g_oauth_member_mapping;';
 

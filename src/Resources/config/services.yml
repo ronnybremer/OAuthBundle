@@ -19,6 +19,6 @@ services:
       calls:
         - [ "setContainer", [ "@service_container" ] ]
   oidc_authenticator:
-    class: con4gis\OidcBundle\Security\OidcAuthenticator
+    class: con4gis\OAuthBundle\Security\OidcAuthenticator
     arguments: ["@contao.framework", "@knpu.oauth2.registry"]
     autowire: true

@@ -9,7 +9,7 @@
  * @link https://www.con4gis.org
  */
 
-namespace con4gis\OidcBundle\DependencyInjection;
+namespace con4gis\OAuthBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -17,7 +17,7 @@ use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Loader\FileLoader;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
-class con4gisOidcExtension extends Extension
+class con4gisOAuthExtension extends Extension
 {
     /**
      * Loads a specific configuration.
@@ -37,6 +37,6 @@ class con4gisOidcExtension extends Extension
 
     public function getAlias()
     {
-        return "con4gis_oidc";
+        return "con4gis_oauth";
     }
 }

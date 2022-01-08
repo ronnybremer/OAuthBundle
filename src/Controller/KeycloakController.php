@@ -1,6 +1,6 @@
 <?php
 
-namespace con4gis\OidcBundle\Controller;
+namespace con4gis\OAuthBundle\Controller;
 
 use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
 use KnpU\OAuth2ClientBundle\Client\OAuth2ClientInterface;

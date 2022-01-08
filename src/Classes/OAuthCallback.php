@@ -10,11 +10,11 @@
  * @copyright   Küstenschmiede GmbH Software & Design
  * @link        https://www.con4gis.org
  */
-namespace con4gis\OidcBundle\Classes;
+namespace con4gis\OAuthBundle\Classes;
 
 use Contao\CoreBundle\DataContainer\PaletteManipulator;
 use Contao\DataContainer;
-use con4gis\OidcBundle\Resources\contao\models\OAuthMemberModel;
+use con4gis\OAuthBundle\Resources\contao\models\OAuthMemberModel;
 use Contao\Message;
 
 class OAuthCallback

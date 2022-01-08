@@ -9,6 +9,6 @@
  * @link https://www.con4gis.org
  */
 
-$GLOBALS['TL_LANG']['FMD']['con4gis_oidc'] = 'con4gis OAuth';
+$GLOBALS['TL_LANG']['FMD']['con4gis_oauth'] = 'con4gis OAuth';
 
 $GLOBALS['TL_LANG']['FMD']['oauth_login'] = 'OAuth Login';

@@ -10,15 +10,15 @@
  * @copyright  Küstenschmiede GmbH Software & Design
  * @link       https://www.con4gis.org
  */
-namespace con4gis\OidcBundle;
+namespace con4gis\OAuthBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
- * Class con4gisOidcBundle
- * @package con4gis\OidcBundle
+ * Class con4gisOAuthBundle
+ * @package con4gis\OAuthBundle
  */
-class con4gisOidcBundle extends Bundle
+class con4gisOAuthBundle extends Bundle
 {
 
 }

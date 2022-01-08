@@ -9,4 +9,4 @@
  * @link https://www.con4gis.org
  */
 
-$array = &$GLOBALS['TL_LANG']['con4gis']['oidc']['frontend'];
+$array = &$GLOBALS['TL_LANG']['con4gis']['oauth']['frontend'];

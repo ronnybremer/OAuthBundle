@@ -20,7 +20,7 @@
  * @link      https://www.kuestenschmiede.de
  */
 
-array_insert($GLOBALS['FE_MOD']['con4gis_oidc'], 1, array
+array_insert($GLOBALS['FE_MOD']['con4gis_oauth'], 1, array
 (
     'oauth_login' => \con4gis\OidcBundle\Resources\contao\modules\OAuthLoginModule::class,
 ));

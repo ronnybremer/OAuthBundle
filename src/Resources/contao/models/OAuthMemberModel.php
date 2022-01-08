@@ -11,7 +11,7 @@
  * @link        https://www.con4gis.org
  *
  */
-namespace con4gis\OidcBundle\Resources\contao\models;
+namespace con4gis\OAuthBundle\Resources\contao\models;
 
 use Contao\MemberModel;
 

@@ -12,9 +12,9 @@
  *
  */
 
-namespace con4gis\OidcBundle\Classes;
+namespace con4gis\OAuthBundle\Classes;
  
-use con4gis\OidcBundle\Resources\contao\models\OAuthMemberModel;
+use con4gis\OAuthBundle\Resources\contao\models\OAuthMemberModel;
 use Contao\Database;
 
 class LoginUserHandler

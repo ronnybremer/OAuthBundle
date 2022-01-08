@@ -1,8 +1,8 @@
 {
-  "name": "con4gis/oidc",
+  "name": "con4gis/oauth",
   "type": "contao-bundle",
   "description": "Authentication bundle with functionality needed for authenticating with OpenID Connect",
-  "keywords": ["con4gis", "authentication", "oidc", "openid", "openid connect", "oidc", "contao", "con4gis_oidc", "OidcBundle"],
+  "keywords": ["con4gis", "authentication", "oidc", "openid", "openid connect", "oauth", "contao", "con4gis_oauth", "OAuthBundle"],
   "homepage": "https://con4gis.org",
   "license": "LGPL-3.0-or-later",
   "authors": [
@@ -37,7 +37,7 @@
   },
   "autoload": {
     "psr-4": {
-      "con4gis\\OidcBundle\\": "src/"
+      "con4gis\\OAuthBundle\\": "src/"
     },
     "classmap": [
       "src/Resources/contao/"
@@ -56,6 +56,6 @@
     "branch-alias": {
       "dev-master": "3.1.x-dev"
     },
-    "contao-manager-plugin": "con4gis\\OidcBundle\\ContaoManager\\Plugin"
+    "contao-manager-plugin": "con4gis\\OAuthBundle\\ContaoManager\\Plugin"
   }
 }

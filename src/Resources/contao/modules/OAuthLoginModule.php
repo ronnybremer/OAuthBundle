@@ -20,7 +20,7 @@
  * @link      https://www.kuestenschmiede.de
  */
 
-namespace con4gis\OidcBundle\Resources\contao\modules;
+namespace con4gis\OAuthBundle\Resources\contao\modules;
 
 use con4gis\CoreBundle\Resources\contao\models\C4gLogModel;
 use Contao\FrontendUser;
