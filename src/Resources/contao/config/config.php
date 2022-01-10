@@ -22,5 +22,5 @@
 
 array_insert($GLOBALS['FE_MOD']['con4gis_oauth'], 1, array
 (
-    'oauth_login' => \con4gis\OidcBundle\Resources\contao\modules\OAuthLoginModule::class,
+    'oauth_login' => \con4gis\OAuthBundle\Resources\contao\modules\OAuthLoginModule::class,
 ));

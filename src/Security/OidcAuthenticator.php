@@ -1,6 +1,6 @@
 <?php
 
-namespace con4gis\OidcBundle\Security;
+namespace con4gis\OAuthBundle\Security;
 
 use Contao\System;
 use Contao\CoreBundle\Framework\ContaoFramework;
