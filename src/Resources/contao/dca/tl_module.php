@@ -56,14 +56,14 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['c4g_oauth_member_mapping'] = array
     'search'                  => true,
     'inputType'               => 'multiColumnWizard',
     'default'                 => 'a:0:{}',
+    'sql'                     => 'blob NOT NULL default \'a:0:{}\'',
     'eval'                    => array(
         'columnFields' => array(
             'contaoField' => array(
                 'label'                   => &$GLOBALS['TL_LANG']['tl_module']['c4g_oauth']['fields']['contaoField'],
                 'filter'                  => false,
-                'inputType'               => 'text',
-//                'inputType'               => 'select',
-//                'options_callback'        => array($cbClass, 'oauthMemberMappingOptions'),
+                'inputType'               => 'select',
+                'options_callback'        => array($cbClass, 'oauthMemberMappingOptions'),
                 'eval'                    => array('tl_class' => 'w50'),
             ),
             'oauthField' => array(

@@ -40,9 +40,6 @@ class LoginUserHandler
         $feUser->login = 1;
         $feUser->tstamp = time();
         $feUser->currentLogin = time();
-        $feUser->email = $userArray['email'];
-        $feUser->firstname = $userArray['firstname'];
-        $feUser->lastname = $userArray['lastname'];
         $feUser->username = $userArray['username'];
 
         //add user to groups
@@ -61,6 +58,20 @@ class LoginUserHandler
             }
         } else {
             $feUser->groups = $loginModule['c4g_oauth_reg_groups'];
+        }
+
+        //map additional member information
+        $memberMappings = $loginModule['c4g_oauth_member_mapping'];
+        if ($memberMappings && $memberMappings != 'a:0:{}') {
+            $memberMappings = unserialize($memberMappings);
+            foreach ($memberMappings as $memberMapping) {
+                if ($memberMapping['contaoField'] == '0') {
+                    break;
+                }
+                $contaoField = $memberMapping['contaoField'];
+                $oauthField = $memberMapping['oauthField'];
+                $feUser->$contaoField = $userArray[$oauthField];
+            }
         }
 
         //save member

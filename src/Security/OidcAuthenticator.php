@@ -55,18 +55,13 @@ class OidcAuthenticator extends SocialAuthenticator
             $oidcUser = $this->getOidcClient()->fetchUserFromToken($credentials);
             $oidcUser = $oidcUser->toArray();
 
-            $firstname = $oidcUser['given_name'];
-            $lastname = $oidcUser['family_name'];
-            $username = $oidcUser['preferred_username'];
-            $email = $oidcUser['email'];
-
             $userArray = [
-                'username' => $username,
-                'email' => $email,
-                'firstname' => $firstname,
-                'lastname' => $lastname,
-                'groups' => []
+                'username' => $oidcUser['preferred_username']
             ];
+
+            foreach ($oidcUser as $oidcUserAttrKey => $oidcUserAttrValue) {
+                $userArray[$oidcUserAttrKey] = $oidcUserAttrValue;
+            }
 
             $this->framework->initialize();
             $loginUser = new LoginUserHandler();
