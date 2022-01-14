@@ -17,6 +17,10 @@ use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Loader\FileLoader;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
+
+/**
+ * Class con4gisOAuthExtension.
+ */
 class con4gisOAuthExtension extends Extension
 {
     /**
@@ -28,13 +32,28 @@ class con4gisOAuthExtension extends Extension
      */
     public function load(array $configs, ContainerBuilder $container)
     {
+        $configuration = new Configuration();
+        $config = $this->processConfiguration($configuration, $configs);
+        $container->setParameter($this->getAlias(), $config);
+
         $loader = new YamlFileLoader(
             $container,
             new FileLocator(__DIR__.'/../Resources/config')
         );
         $loader->load('services.yml');
+
+        $rootKey = $this->getAlias();
+
+        $container->setParameter($rootKey.'.oidc.client_id', $config['oidc']['client_id']);
+        $container->setParameter($rootKey.'.oidc.client_secret', $config['oidc']['client_secret']);
+        $container->setParameter($rootKey.'.oidc.auth_server_url', $config['oidc']['auth_server_url']);
+        $container->setParameter($rootKey.'.oidc.realm', $config['oidc']['realm']);
+        $container->setParameter($rootKey.'.oidc.secured_frontend', $config['oidc']['secured_frontend']);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getAlias()
     {
         return "con4gis_oauth";

@@ -33,6 +33,7 @@ class Plugin implements BundlePluginInterface, ExtensionPluginInterface, Routing
 {
     public function registerContainerConfiguration(LoaderInterface $loader, array $config)
     {
+        $loader->load('@con4gisOAuthBundle/Resources/config/config.yml');
         $loader->load('@con4gisOAuthBundle/Resources/config/knpu_oauth2_client.yml');
         $loader->load(__DIR__.'/../Resources/config/services.yml');
     }
@@ -106,7 +107,8 @@ class Plugin implements BundlePluginInterface, ExtensionPluginInterface, Routing
                     ]
                 ];
                 unset($extensionConfig['firewalls']['contao_frontend']['request_matcher']);
-                if ($container->getParameter('secured') == 'true') {
+//                if ($container->getParameter('secured') == 'true') {
+                if ($container->getParameter('con4gis.oauth.oidc.secured') == 'true') {
                     $extensionConfig['access_control'][3]['roles'] = "ROLE_OAUTH_USER";
 
                     $extensionConfig['firewalls']['contao_frontend']['entry_point'] = 'oidc_authenticator';

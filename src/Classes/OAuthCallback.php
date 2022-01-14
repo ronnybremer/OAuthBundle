@@ -84,7 +84,7 @@ class OAuthCallback
         $db = Database::getInstance();
         $memberFields = $db->getFieldNames("tl_member");
         $returnArray = ['-'];
-        $skippedFields = ['id','tstamp','c4gOAuthMember','currentLogin','lastLogin','backupCodes','useTwoFactor','groups','login','assignDir','homeDir','disable','start','stop','dateAdded','session','locked','secret','backupCodes','trustedTokenVersion','newsletter','loginAttempts'];
+        $skippedFields = ['id','tstamp','c4gOAuthMember','username','currentLogin','lastLogin','backupCodes','useTwoFactor','groups','login','assignDir','homeDir','disable','start','stop','dateAdded','session','locked','secret','backupCodes','trustedTokenVersion','newsletter','loginAttempts'];
         foreach ($memberFields as $memberField) {
             if (!in_array($memberField, $skippedFields)) {
                 $returnArray[$memberField] = $memberField;

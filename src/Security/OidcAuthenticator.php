@@ -1,8 +1,19 @@
 <?php
+/**
+ * This file is part of con4gis,
+ * the gis-kit for Contao CMS.
+ *
+ * @package   	con4gis
+ * @version        8
+ * @author  	    con4gis contributors (see "authors.txt")
+ * @license 	    LGPL-3.0-or-later
+ * @copyright 	Küstenschmiede GmbH Software & Design
+ * @link              https://www.con4gis.org
+ *
+ */
 
 namespace con4gis\OAuthBundle\Security;
 
-use Contao\System;
 use Contao\CoreBundle\Framework\ContaoFramework;
 use con4gis\OAuthBundle\Classes\LoginUserHandler;
 use Doctrine\ORM\EntityManagerInterface;
@@ -17,7 +28,7 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
-
+use Contao\System;
 class OidcAuthenticator extends SocialAuthenticator
 {
     use TargetPathTrait;
@@ -26,6 +37,7 @@ class OidcAuthenticator extends SocialAuthenticator
     private $em;
     private $router;
     private $framework;
+    private $securedFrontend;
 
     public function __construct(ContaoFramework $contaoFramework, ClientRegistry $clientRegistry, RouterInterface $router, EntityManagerInterface $em)
     {
@@ -49,7 +61,13 @@ class OidcAuthenticator extends SocialAuthenticator
 
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
-        if ($_ENV['SECURED'] == 'true') {
+        $this->framework->initialize();
+        $systemAdapter = $this->framework->getAdapter(System::class);
+
+//        $securedFrontend = $systemAdapter->getContainer()->getParameter('secured');
+        $securedFrontend = $systemAdapter->getContainer()->getParameter('con4gis.oauth.oidc.secured');
+
+        if ($securedFrontend == 'true') {
             $user = $userProvider->loadUserByUsername($this->getOidcClient()->fetchUserFromToken($credentials)->getId());
         } else {
             $oidcUser = $this->getOidcClient()->fetchUserFromToken($credentials);
@@ -63,7 +81,6 @@ class OidcAuthenticator extends SocialAuthenticator
                 $userArray[$oidcUserAttrKey] = $oidcUserAttrValue;
             }
 
-            $this->framework->initialize();
             $loginUser = new LoginUserHandler();
             $feUser = $loginUser->addUser($userArray, '/oidc/login');
 
