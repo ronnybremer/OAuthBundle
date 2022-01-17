@@ -107,7 +107,6 @@ class Plugin implements BundlePluginInterface, ExtensionPluginInterface, Routing
                     ]
                 ];
                 unset($extensionConfig['firewalls']['contao_frontend']['request_matcher']);
-//                if ($container->getParameter('secured') == 'true') {
                 if ($container->getParameter('con4gis.oauth.oidc.secured') == 'true') {
                     $extensionConfig['access_control'][3]['roles'] = "ROLE_OAUTH_USER";
 

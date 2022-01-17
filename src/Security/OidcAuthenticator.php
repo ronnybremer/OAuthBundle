@@ -64,7 +64,6 @@ class OidcAuthenticator extends SocialAuthenticator
         $this->framework->initialize();
         $systemAdapter = $this->framework->getAdapter(System::class);
 
-//        $securedFrontend = $systemAdapter->getContainer()->getParameter('secured');
         $securedFrontend = $systemAdapter->getContainer()->getParameter('con4gis.oauth.oidc.secured');
 
         if ($securedFrontend == 'true') {
@@ -96,7 +95,7 @@ class OidcAuthenticator extends SocialAuthenticator
     private function getOidcClient()
     {
         return $this->clientRegistry
-            // "oidc" is the key used in config/packages/knpu_oauth2_client.yaml
+            // "oidc" is the key used in config/knpu_oauth2_client.yml
             ->getClient('oidc');
     }
 

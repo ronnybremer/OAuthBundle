@@ -24,7 +24,7 @@ class KeycloakController extends AbstractController
         $clientRegistry = $this->get('knpu.oauth2.registry');
         // will redirect to sso!
         return $clientRegistry
-            ->getClient('oidc') // key used in config/packages/knpu_oauth2_client.yaml
+            ->getClient('oidc') // key used in config/knpu_oauth2_client.yml
             ->redirect();
     }
 
