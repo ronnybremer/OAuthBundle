@@ -1,12 +1,11 @@
 # config/services.yaml
 parameters:
-  env(SECURED): "%secured%"
   con4gis.oauth.oidc.client_id: "###"
   con4gis.oauth.oidc.client_secret: "###"
   con4gis.oauth.oidc.auth_server_url: "###"
   con4gis.oauth.oidc.realm: "###"
   con4gis.oauth.oidc.secured_frontend: "false"
-  secured: "false"
+  con4gis.oauth.oidc.secured: "false"
 
 services:
   _defaults:
