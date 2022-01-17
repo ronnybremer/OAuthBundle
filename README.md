@@ -45,7 +45,7 @@ This step is only necessary if you don't make the entire frontend accessible via
 
 In the contao backend you can create the new OAuth login module. There you can set up, which groups will be assigned to new logins and which user data will be stored in the contao database. The username is saved by default. 
 
-The module creates a new login button, that you can placed anywhere on your site.
+The module creates a new login button, that you can place anywhere on your site.
 
 ## Callback URLs
 
