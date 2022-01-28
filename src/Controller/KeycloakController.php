@@ -2,6 +2,7 @@
 
 namespace con4gis\OAuthBundle\Controller;
 
+use http\Client;
 use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
 use KnpU\OAuth2ClientBundle\Client\OAuth2ClientInterface;
 use KnpU\OAuth2ClientBundle\Security\User\OAuthUserProvider;
@@ -14,6 +15,11 @@ use Symfony\Component\HttpFoundation\Response;
 
 class KeycloakController extends AbstractController
 {
+    private $clientRegistry;
+
+    public function __construct(ClientRegistry $clientRegistry) {
+        $this->clientRegistry = $clientRegistry;
+    }
     /**
      * Link to this controller to start the "connect" process
      *
@@ -21,9 +27,8 @@ class KeycloakController extends AbstractController
      */
     public function connectAction()
     {
-        $clientRegistry = $this->get('knpu.oauth2.registry');
         // will redirect to sso!
-        return $clientRegistry
+        return $this->clientRegistry
             ->getClient('oidc') // key used in config/knpu_oauth2_client.yml
             ->redirect();
     }
