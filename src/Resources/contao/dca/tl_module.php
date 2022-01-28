@@ -24,7 +24,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['c4g_oauth_type'] = array
     ],
     'default'                 => 'oidc',
     'eval'                    => ['submitOnChange' => false, 'mandatory' => true],
-    'sql'                     => "varchar(32) unsigned NOT NULL default ''",
+    'sql'                     => "varchar(32) NOT NULL default ''",
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['c4g_oauth_btn_name'] = array
@@ -35,7 +35,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['c4g_oauth_btn_name'] = array
     'inputType'               => 'text',
     'default'                 => 'Login',
     'eval'                    => ['submitOnChange' => false, 'mandatory' => true],
-    'sql'                     => "varchar(256) unsigned NOT NULL default ''",
+    'sql'                     => "varchar(256) NOT NULL default ''",
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['c4g_oauth_reg_groups'] = array

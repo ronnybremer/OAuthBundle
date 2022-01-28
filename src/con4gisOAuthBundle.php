@@ -13,6 +13,8 @@
 namespace con4gis\OAuthBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
+use con4gis\OAuthBundle\DependencyInjection\con4gisOAuthExtension;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
  * Class con4gisOAuthBundle
@@ -20,5 +22,17 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  */
 class con4gisOAuthBundle extends Bundle
 {
+    public function getContainerExtension(): con4gisOAuthExtension
+    {
+//         Set alias con4gis_oauth
+        return new con4gisOAuthExtension();
+    }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function build(ContainerBuilder $container): void
+    {
+        parent::build($container);
+    }
 }
