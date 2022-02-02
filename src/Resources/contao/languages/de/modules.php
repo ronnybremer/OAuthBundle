@@ -12,3 +12,5 @@
 $GLOBALS['TL_LANG']['FMD']['con4gis_oauth'] = 'con4gis OAuth';
 
 $GLOBALS['TL_LANG']['FMD']['oauth_login'] = 'OAuth Login';
+
+$GLOBALS['TL_LANG']['MOD']['con4gis_oauth'] = array('con4gis OAuth', 'Externe Benutzerauthentifizierungen über OAuth bzw. OpenID Connect');
