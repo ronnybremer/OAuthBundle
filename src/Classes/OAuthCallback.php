@@ -15,7 +15,7 @@ namespace con4gis\OAuthBundle\Classes;
 use Contao\CoreBundle\DataContainer\PaletteManipulator;
 use Contao\Database;
 use Contao\DataContainer;
-use con4gis\OAuthBundle\Resources\contao\models\OAuthMemberModel;
+use Contao\MemberModel;
 use Contao\Message;
 
 class OAuthCallback
@@ -33,7 +33,7 @@ class OAuthCallback
         $currentRecord = null;
 
         if ($dc->table == 'tl_member') {
-            $currentRecord = OAuthMemberModel::findById($dc->id);
+            $currentRecord = MemberModel::findById($dc->id);
             if ($currentRecord == null || $currentRecord->c4gOAuthMember == 0) {
                 return;
             }

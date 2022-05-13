@@ -13,9 +13,9 @@
  */
 
 namespace con4gis\OAuthBundle\Classes;
- 
-use con4gis\OAuthBundle\Resources\contao\models\OAuthMemberModel;
+
 use Contao\Database;
+use Contao\MemberModel;
 
 class LoginUserHandler
 {
@@ -29,9 +29,9 @@ class LoginUserHandler
     
     public function addUser ($userArray, $loginRoute) {
 
-        $feUser = OAuthMemberModel::findByUsername($userArray['username']);
+        $feUser = MemberModel::findByUsername($userArray['username']);
         if (!$feUser) {
-            $feUser = new OAuthMemberModel();
+            $feUser = new MemberModel();
             $feUser->dateAdded = time();
         } else {
             $feUser->lastLogin = $feUser->currentLogin;
