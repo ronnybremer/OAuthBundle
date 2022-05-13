@@ -23,7 +23,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['c4g_oauth_type'] = array
         '/oidc/login'               => &$GLOBALS['TL_LANG']['tl_module']['c4g_oauth']['fields']['type_oidc'],
     ],
     'default'                 => 'oidc',
-    'eval'                    => ['submitOnChange' => false, 'mandatory' => true],
+    'eval'                    => ['submitOnChange' => false, 'mandatory' => true, 'tl_class' => 'clr'],
     'sql'                     => "varchar(32) NOT NULL default ''",
 );
 
