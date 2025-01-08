@@ -1,4 +1,7 @@
 # OAuthBundle
+> [!IMPORTANT]  
+> We are not actively developing this con4gis module. Further development orders are possible.
+
 This bundle adds OAuth Authentication functionality for Contao frontend users. In addition, you can also make the entire frontend accessible exclusively via an upstream login.
 
 Currently this bundle only supports OpenID Connect Servers.
