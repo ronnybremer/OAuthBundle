@@ -1,29 +1,23 @@
 {
-  "name": "con4gis/oauth",
+  "name": "ronnybremer/oauth",
   "type": "contao-bundle",
   "description": "Authentication bundle with functionality needed for authenticating with OpenID Connect",
-  "keywords": ["con4gis", "authentication", "oidc", "openid", "openid connect", "oauth", "contao", "con4gis_oauth", "OAuthBundle"],
-  "homepage": "https://con4gis.org",
+  "keywords": ["authentication", "oidc", "openid", "openid connect", "oauth", "contao", "OAuthBundle"],
+  "homepage": "https://github.com/ronnybremer/AuthBundle",
   "license": "LGPL-3.0-or-later",
   "authors": [
     {
-      "name": "Kuestenschmiede GmbH Software & Design",
-      "homepage": "https://kuestenschmiede.de",
-      "role": "Operator"
-    },
-    {
-      "name": "con4gis community",
-      "homepage": "https://con4gis.org",
+      "name": "Ronny Bremer",
       "role": "Developer"
     }
   ],
   "support": {
-    "email": "support@con4gis.org",
-    "issues": "https://github.com/Kuestenschmiede/AuthBundle/issues"
+    "email": "ronny@bremers.cc",
+    "issues": "https://github.com/ronnybremer/AuthBundle/issues"
   },
   "require": {
-    "php": "^7.4 || ^8.0",
-    "contao/core-bundle": "^4.9",
+    "php": "^8.2",
+    "contao/core-bundle": "^5.3",
     "menatwork/contao-multicolumnwizard-bundle": "^3.5.4",
     "doctrine/orm": "^2.8.1",
     "doctrine/data-fixtures": "^1.4.4",
@@ -37,7 +31,7 @@
   },
   "autoload": {
     "psr-4": {
-      "con4gis\\OAuthBundle\\": "src/"
+      "rbremer\\OAuthBundle\\": "src/"
     },
     "classmap": [
       "src/Resources/contao/"
@@ -53,9 +47,6 @@
     "preferred-install": "dist"
   },
   "extra": {
-    "branch-alias": {
-      "dev-main": "1.0.x-dev"
-    },
-    "contao-manager-plugin": "con4gis\\OAuthBundle\\ContaoManager\\Plugin"
+    "contao-manager-plugin": "ronnybremer\\OAuthBundle\\ContaoManager\\Plugin"
   }
 }

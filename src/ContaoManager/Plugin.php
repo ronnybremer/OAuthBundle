@@ -1,18 +1,7 @@
 <?php
-/*
- * This file is part of con4gis,
- * the gis-kit for Contao CMS.
- *
- * @package    con4gis
- * @version    8
- * @author     con4gis contributors (see "authors.txt")
- * @license    LGPL-3.0-or-later
- * @copyright  Küstenschmiede GmbH Software & Design
- * @link       https://www.con4gis.org
- */
 namespace con4gis\OAuthBundle\ContaoManager;
 
-use con4gis\OAuthBundle\con4gisOAuthBundle;
+use ronnybremer\OAuthBundle\OAuthBundle;
 use Contao\CoreBundle\ContaoCoreBundle;
 use Contao\ManagerPlugin\Bundle\Config\BundleConfig;
 use Contao\ManagerPlugin\Bundle\Config\ConfigInterface;
@@ -33,14 +22,11 @@ class Plugin implements BundlePluginInterface, ExtensionPluginInterface, Routing
 {
     public function registerContainerConfiguration(LoaderInterface $loader, array $config)
     {
-        $loader->load('@con4gisOAuthBundle/Resources/config/config.yml');
-        $loader->load('@con4gisOAuthBundle/Resources/config/knpu_oauth2_client.yml');
+        $loader->load('@OAuthBundle/Resources/config/config.yml');
+        $loader->load('@OAuthBundle/Resources/config/knpu_oauth2_client.yml');
         $loader->load(__DIR__.'/../Resources/config/services.yml');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getRouteCollection(LoaderResolverInterface $resolver, KernelInterface $kernel)
     {
         return $resolver
@@ -49,31 +35,15 @@ class Plugin implements BundlePluginInterface, ExtensionPluginInterface, Routing
             ;
     }
 
-    /**
-     * Gets a list of autoload configurations for this bundle.
-     *
-     * @param ParserInterface $parser
-     *
-     * @return ConfigInterface[]
-     */
-    public function getBundles(ParserInterface $parser)
+    public function getBundles(ParserInterface $parser): array
     {
         return [
             BundleConfig::create(KnpUOAuth2ClientBundle::class),
-            BundleConfig::create(con4gisOAuthBundle::class)
+            BundleConfig::create(OAuthBundle::class)
                 ->setLoadAfter([ContaoCoreBundle::class, KnpUOAuth2ClientBundle::class])
         ];
     }
 
-    /**
-     * Allows a plugin to override extension configuration.
-     *
-     * @param string           $extensionName
-     * @param array            $extensionConfigs
-     * @param ContainerBuilder $container
-     *
-     * @return array
-     */
     public function getExtensionConfig($extensionName, array $extensionConfigs, ContainerBuilder $container)
     {
         if ('security' !== $extensionName) {
@@ -107,7 +77,7 @@ class Plugin implements BundlePluginInterface, ExtensionPluginInterface, Routing
                     ]
                 ];
                 unset($extensionConfig['firewalls']['contao_frontend']['request_matcher']);
-                if ($container->getParameter('con4gis.oauth.oidc.secured') == 'true') {
+                if ($container->getParameter('oauth.oidc.secured') == 'true') {
                     $extensionConfig['access_control'][3]['roles'] = "ROLE_OAUTH_USER";
 
                     $extensionConfig['firewalls']['contao_frontend']['entry_point'] = 'oidc_authenticator';
