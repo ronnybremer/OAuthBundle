@@ -1,21 +1,9 @@
 <?php
-/**
- * This file is part of con4gis,
- * the gis-kit for Contao CMS.
- *
- * @package   	con4gis
- * @version        8
- * @author  	    con4gis contributors (see "authors.txt")
- * @license 	    LGPL-3.0-or-later
- * @copyright 	Küstenschmiede GmbH Software & Design
- * @link              https://www.con4gis.org
- *
- */
 
-namespace con4gis\OAuthBundle\Security;
+namespace ronnybremer\OAuthBundle\Security;
 
 use Contao\CoreBundle\Framework\ContaoFramework;
-use con4gis\OAuthBundle\Classes\LoginUserHandler;
+use ronnybremer\OAuthBundle\Classes\LoginUserHandler;
 use Doctrine\ORM\EntityManagerInterface;
 use KnpU\OAuth2ClientBundle\Client\OAuth2ClientInterface;
 use KnpU\OAuth2ClientBundle\Security\Authenticator\SocialAuthenticator;
@@ -29,6 +17,7 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 use Contao\System;
+
 class OidcAuthenticator extends SocialAuthenticator
 {
     use TargetPathTrait;
@@ -64,7 +53,7 @@ class OidcAuthenticator extends SocialAuthenticator
         $this->framework->initialize();
         $systemAdapter = $this->framework->getAdapter(System::class);
 
-        $securedFrontend = $systemAdapter->getContainer()->getParameter('con4gis.oauth.oidc.secured');
+        $securedFrontend = $systemAdapter->getContainer()->getParameter('oauth.oidc.secured');
 
         if ($securedFrontend == 'true') {
             $user = $userProvider->loadUserByUsername($this->getOidcClient()->fetchUserFromToken($credentials)->getId());

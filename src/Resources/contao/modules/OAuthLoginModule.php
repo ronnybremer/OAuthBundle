@@ -1,17 +1,8 @@
 <?php
-/**
- * This file is part of con4gis, the gis-kit for Contao CMS.
- * @package con4gis
- * @version 8
- * @author con4gis contributors (see "authors.txt")
- * @license LGPL-3.0-or-later
- * @copyright (c) 2010-2022, by Küstenschmiede GmbH Software & Design
- * @link https://www.con4gis.org
- */
 
-namespace con4gis\OAuthBundle\Resources\contao\modules;
+namespace ronnybremer\OAuthBundle\Resources\contao\modules;
 
-use con4gis\CoreBundle\Resources\contao\models\C4gLogModel;
+use ronnybremer\CoreBundle\Resources\contao\models\LogModel;
 use Contao\FrontendUser;
 
 class OAuthLoginModule extends \Module
@@ -46,10 +37,10 @@ class OAuthLoginModule extends \Module
     protected function compile()
     {
         try {
-            \System::loadLanguageFile('fe_c4g_oauth_login');
+            \System::loadLanguageFile('fe_oauth_login');
             $template = $this->Template;
         } catch(\Throwable $e) {
-            C4gLogModel::addLogEntry('oauth', $e->getMessage());
+            LogModel::addLogEntry('oauth', $e->getMessage());
             return;
         }
         // Get user id when user is logged in

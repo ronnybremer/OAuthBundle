@@ -1,25 +1,13 @@
 <?php
-/**
- * This file is part of con4gis,
- * the gis-kit for Contao CMS.
- *
- * @package   	con4gis
- * @version        8
- * @author  	    con4gis contributors (see "authors.txt")
- * @license 	    LGPL-3.0-or-later
- * @copyright 	Küstenschmiede GmbH Software & Design
- * @link              https://www.con4gis.org
- *
- */
 
-namespace con4gis\OAuthBundle\DependencyInjection;
+namespace ronnybremer\OAuthBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 class Configuration implements ConfigurationInterface
 {
-    public const ROOT_KEY = 'con4gis_oauth';
+    public const ROOT_KEY = 'oauth';
 
     public function getConfigTreeBuilder()
     {

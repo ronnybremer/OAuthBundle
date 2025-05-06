@@ -1,5 +1,6 @@
 <?php
-namespace con4gis\OAuthBundle\ContaoManager;
+
+namespace ronnybremer\OAuthBundle\ContaoManager;
 
 use ronnybremer\OAuthBundle\OAuthBundle;
 use Contao\CoreBundle\ContaoCoreBundle;

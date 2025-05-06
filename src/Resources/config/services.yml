@@ -1,11 +1,11 @@
 # config/services.yaml
 parameters:
-  con4gis.oauth.oidc.client_id: "###"
-  con4gis.oauth.oidc.client_secret: "###"
-  con4gis.oauth.oidc.auth_server_url: "###"
-  con4gis.oauth.oidc.realm: "###"
-  con4gis.oauth.oidc.secured_frontend: "false"
-  con4gis.oauth.oidc.secured: "false"
+  oauth.oidc.client_id: "###"
+  oauth.oidc.client_secret: "###"
+  oauth.oidc.auth_server_url: "###"
+  oauth.oidc.realm: "###"
+  oauth.oidc.secured_frontend: "false"
+  oauth.oidc.secured: "false"
 
 services:
   _defaults:
@@ -19,12 +19,12 @@ services:
     Symfony\Component\DependencyInjection\ContainerAwareInterface:
       calls:
         - [ "setContainer", [ "@service_container" ] ]
-  con4gis\OAuthBundle\Controller\:
+  ronnybremer\OAuthBundle\Controller\:
     resource: '../../Controller'
     tags: [ 'controller.service_arguments' ]
   oidc_authenticator:
-    class: con4gis\OAuthBundle\Security\OidcAuthenticator
+    class: ronnybremer\OAuthBundle\Security\OidcAuthenticator
     arguments: ["@contao.framework", "@knpu.oauth2.registry"]
     autowire: true
-  con4gis\OAuthBundle\Controller\KeycloakController:
+  ronnybremer\OAuthBundle\Controller\KeycloakController:
     arguments: ["@knpu.oauth2.registry"]

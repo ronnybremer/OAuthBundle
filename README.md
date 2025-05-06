@@ -6,7 +6,8 @@ This bundle adds OAuth Authentication functionality for Contao frontend users. I
 
 Currently this bundle only supports OpenID Connect Servers.
 
-Based on https://github.com/Kuestenschmiede/OAuthBundle
+Originally developed by https://github.com/Kuestenschmiede/OAuthBundle for Contao 4.
+Original (c) Küstenschmiede GmbH Software & Design
 
 ## Installation
 

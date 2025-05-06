@@ -1,6 +1,6 @@
 <?php
 
-namespace con4gis\OAuthBundle\Controller;
+namespace ronnybremer\OAuthBundle\Controller;
 
 use http\Client;
 use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
@@ -20,6 +20,7 @@ class KeycloakController extends AbstractController
     public function __construct(ClientRegistry $clientRegistry) {
         $this->clientRegistry = $clientRegistry;
     }
+
     /**
      * Link to this controller to start the "connect" process
      *
